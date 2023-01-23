@@ -16,7 +16,7 @@ const CharacterCard: React.FC<ICharactersProps> = ({ character }) => {
   return (
     <CardDiv>
       <LinkStyled
-        to={`/characters/${character.id}/${strToSlug(character.name)}`}
+        to={`/character/${character.id}/${strToSlug(character.name)}`}
       >
         <Ratio
           aspectRatio="1x1"

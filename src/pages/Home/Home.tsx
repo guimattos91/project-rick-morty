@@ -1,51 +1,57 @@
 import { memo, useEffect } from 'react'
 
-import { Container, Row, Col, Spinner } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
-import { useCharacters } from 'context/CharactersContext'
+import CharactersBanner from 'assets/charactersimage.png'
+import EpisodesBanner from 'assets/episodesimage.png'
+import LocationBanner from 'assets/locationimage.png'
 
-import CharactersCard from 'components/CharactersCard'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
-import PaginateComponent from 'components/PaginateComponent'
 
 import useTitle from 'hooks/useTitle'
 
-const Home: React.FC = () => {
-  const { characters, isLoading, currentPage, totalPages, fetchCharacters } =
-    useCharacters()
+import { ImageStiled } from './style'
 
+const Home: React.FC = () => {
   const setTitle = useTitle()
   useEffect(() => setTitle(''))
-
-  useEffect(() => {
-    fetchCharacters(1)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <>
       <Header />
       <main>
         <Container>
-          <Row className="row-cols-1  row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pt-4">
-            {isLoading && (
-              <div className="text-center">
-                <Spinner animation="border" variant="success" />
-              </div>
-            )}
-            {!isLoading &&
-              characters.map((character) => (
-                <Col key={character.id} className="mb-4">
-                  <CharactersCard character={character} />
-                </Col>
-              ))}
+          <Row className="row-cols-1 pt-5">
+            <Col>
+              <Link to="/characters">
+                <ImageStiled
+                  src={CharactersBanner}
+                  alt="Characters"
+                  className="img-fluid"
+                />
+              </Link>
+            </Col>
+            <Col>
+              <Link to="/locations">
+                <ImageStiled
+                  src={LocationBanner}
+                  alt="Location"
+                  className="img-fluid"
+                />
+              </Link>
+            </Col>
+            <Col>
+              <Link to="/episodes">
+                <ImageStiled
+                  src={EpisodesBanner}
+                  alt="Episodes"
+                  className="img-fluid"
+                />
+              </Link>
+            </Col>
           </Row>
-          <PaginateComponent
-            totalPages={totalPages}
-            currentPage={currentPage}
-            fetchCategory={fetchCharacters}
-          />
         </Container>
       </main>
       <Footer />

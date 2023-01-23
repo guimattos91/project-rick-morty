@@ -30,3 +30,13 @@ export const BreadcrumberStyled = styled.ol`
     justify-content: center;
   }
 `
+export const BreadcrumberStyledMainPage = styled.ol`
+  li {
+    color: white;
+  }
+  padding: 0;
+  margin: 0;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+`

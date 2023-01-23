@@ -155,12 +155,14 @@ const Character: React.FC = () => {
                     {/* Origin Character */}
                     {character.origin && (
                       <DivInformationStyled>
-                        <TextCategory className="fs-4">
-                          Origin Location:
-                        </TextCategory>
-                        <TextInformation className="fs-4">
-                          &nbsp;{character.origin.name}
-                        </TextInformation>
+                        <div>
+                          <TextCategory className="fs-4">
+                            Origin Location:
+                          </TextCategory>
+                          <TextInformation className="fs-4">
+                            {character.origin.name}
+                          </TextInformation>
+                        </div>
                       </DivInformationStyled>
                     )}
                   </DivStyled>

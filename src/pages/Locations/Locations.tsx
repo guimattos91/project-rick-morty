@@ -13,7 +13,7 @@ import useTitle from 'hooks/useTitle'
 
 import { LinkStyled } from 'pages/Character/style'
 
-import { BreadcrumberStyled } from 'styles'
+import { BreadcrumberStyledMainPage } from 'styles'
 
 const Location: React.FC = () => {
   const { locations, isLoading, currentPage, totalPages, fetchLocations } =
@@ -35,14 +35,14 @@ const Location: React.FC = () => {
           <Row className="row-cols-1  row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pt-4">
             <Col>
               <nav aria-label="breadcrumb">
-                <BreadcrumberStyled className="breadcrumb">
+                <BreadcrumberStyledMainPage className="breadcrumb">
                   <li className="breadcrumb-item" aria-current="page">
                     <LinkStyled to="/">Home</LinkStyled>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
                     Locations
                   </li>
-                </BreadcrumberStyled>
+                </BreadcrumberStyledMainPage>
               </nav>
               <h1 className="text-white">Locations</h1>
             </Col>
