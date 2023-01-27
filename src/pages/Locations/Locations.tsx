@@ -1,11 +1,12 @@
 import { memo, useEffect } from 'react'
 
-import { Container, Row, Col, Spinner } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import { useLocal } from 'context/LocationContext'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
+import LoadingComponent from 'components/LoadingComponent'
 import LocationCard from 'components/LocationCard'
 import PaginateComponent from 'components/PaginateComponent'
 
@@ -47,24 +48,24 @@ const Location: React.FC = () => {
               <h1 className="text-white">Locations</h1>
             </Col>
           </Row>
-          <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pt-4">
-            {isLoading && (
-              <div className="text-center">
-                <Spinner animation="border" variant="success" />
-              </div>
-            )}
-            {!isLoading &&
-              locations.map((location) => (
-                <Col key={location.id} className="mb-4">
-                  <LocationCard location={location} />
-                </Col>
-              ))}
-          </Row>
-          <PaginateComponent
-            totalPages={totalPages}
-            currentPage={currentPage}
-            fetchCategory={fetchLocations}
-          />
+          {isLoading && <LoadingComponent />}
+          {!isLoading && (
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pt-4">
+              {locations &&
+                locations.map((location) => (
+                  <Col key={location.id} className="mb-4">
+                    <LocationCard location={location} />
+                  </Col>
+                ))}
+            </Row>
+          )}
+          {!isLoading && locations && (
+            <PaginateComponent
+              totalPages={totalPages}
+              currentPage={currentPage}
+              fetchCategory={fetchLocations}
+            />
+          )}
         </Container>
       </main>
       <Footer />

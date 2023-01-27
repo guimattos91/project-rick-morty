@@ -4,14 +4,21 @@ export const GlobalStyle = createGlobalStyle`
 body, html, #root {
   margin: 0;
   padding: 0;
+  display:flex;
+  flex-direction: column;
   min-height: 100vh;
-
+  background-color: rgb(39, 43, 51);
+  width: 100%;
 }
 
 
 main{
   background-color: rgb(39, 43, 51);
-  min-height:70vh;
+  min-height: 100%;
+}
+
+footer{
+  margin-top:auto;
 }
 
 p{

@@ -1,12 +1,13 @@
 import { memo, useEffect } from 'react'
 
-import { Container, Row, Col, Spinner } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import { useEpisodes } from 'context/EpisodesContext'
 
 import EpisodesCard from 'components/EpisodesCard'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
+import LoadingComponent from 'components/LoadingComponent'
 import PaginateComponent from 'components/PaginateComponent'
 
 import useTitle from 'hooks/useTitle'
@@ -47,24 +48,25 @@ const Episodes: React.FC = () => {
               <h1 className="text-white">Episodes</h1>
             </Col>
           </Row>
-          <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pt-4">
-            {isLoading && (
-              <div className="text-center">
-                <Spinner animation="border" variant="success" />
-              </div>
-            )}
-            {!isLoading &&
-              episodes.map((oneepisode) => (
-                <Col key={oneepisode.id} className="mb-4">
-                  <EpisodesCard episodeprop={oneepisode} />
-                </Col>
-              ))}
-          </Row>
-          <PaginateComponent
-            totalPages={totalPages}
-            currentPage={currentPage}
-            fetchCategory={fetchEpisodes}
-          />
+          {isLoading && <LoadingComponent />}
+
+          {!isLoading && (
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pt-4">
+              {episodes &&
+                episodes.map((oneepisode) => (
+                  <Col key={oneepisode.id} className="mb-4">
+                    <EpisodesCard episodeprop={oneepisode} />
+                  </Col>
+                ))}
+            </Row>
+          )}
+          {!isLoading && episodes && (
+            <PaginateComponent
+              totalPages={totalPages}
+              currentPage={currentPage}
+              fetchCategory={fetchEpisodes}
+            />
+          )}
         </Container>
       </main>
       <Footer />
